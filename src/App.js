@@ -7,6 +7,7 @@ import GuideScreen from './screen/GuideScreen';
 import HomepageScreen from './screen/HomepageScreen';
 import ArticleScreen from './screen/ArticleScreen';
 import IntroScreen from './screen/IntroScreen';
+import MyPageScreen from './screen/MyPageScreen';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <Route path="/myhomepage" element={<HomepageScreen/>}/>
           <Route path="/article" element={<ArticleScreen/>}/>
           <Route path="/intro" element={<IntroScreen/>}/>
+          <Route path="/mypage" element={<MyPageScreen/>}/>
         </Routes>
       </Router>
     );
