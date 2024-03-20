@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MenuBar from "../common/MenuBar.jsx";
 import AlertBar from "../common/Alert.jsx";
@@ -9,6 +9,9 @@ import unisphereHand from "../resource/unisphere_logo_hand.png";
 
 function IntroTemplate() {
   let isFirstLogin = true;
+  const [showMyPage, setShowMyPage] = useState(true);
+  const [buttonOneZIndex, setButtonOneZIndex] = useState(2); // 기본 버튼은 홈피 버튼
+  const [buttonTwoZIndex, setButtonTwoZIndex] = useState(0);
 
   return (
     <HomepagePosition>
@@ -18,37 +21,63 @@ function IntroTemplate() {
         <text>마이페이지</text>
         <img src={unisphereHand} alt="UniSphereHand" />
       </LogoPart>
-      <ButtonOne>내 정보</ButtonOne>
-      <ButtonTwo>아바타 설정</ButtonTwo>
-      <WhiteBox>
-        <AvatarBox>
-          <BubblePart>
-            {isFirstLogin ? <text>자기소개를 작성해주세요!</text> : null}
-            <BubbleBubble></BubbleBubble>
-          </BubblePart>
-          {isFirstLogin ? (
-            <Avatar
-              name=" "
-              src={chRoot}
-              width="120vw"
-              marginLeft="30px"
-              marginTop="35px"
-            />
-          ) : null}
-          <AvatarChangeButton>아바타 수정</AvatarChangeButton>
-        </AvatarBox>
-        <TextBox>
+      <ButtonOne
+        onClick={() => {
+          setShowMyPage(true);
+          setButtonOneZIndex(2);
+          setButtonTwoZIndex(0);
+        }}
+        style={{
+          zIndex: buttonOneZIndex,
+        }}
+      >
+        내 정보
+      </ButtonOne>
+      <ButtonTwo
+        onClick={() => {
+          setShowMyPage(false);
+          setButtonOneZIndex(0);
+          setButtonTwoZIndex(2);
+        }}
+        style={{
+          zIndex: buttonTwoZIndex,
+        }}
+      >
+        {" "}
+        아바타 설정
+      </ButtonTwo>
+      {showMyPage && (
+        <WhiteBox>
+          <AvatarBox>
+            <BubblePart>
+              {isFirstLogin ? <text>자기소개를 작성해주세요!</text> : null}
+              <BubbleBubble></BubbleBubble>
+            </BubblePart>
+            {isFirstLogin ? (
+              <Avatar
+                name=" "
+                src={chRoot}
+                width="120vw"
+                marginLeft="30px"
+                marginTop="35px"
+              />
+            ) : null}
+            <AvatarChangeButton>아바타 수정</AvatarChangeButton>
+          </AvatarBox>
+          <TextBox>
             <TextPart>
-            <h1>닉네임</h1>
+              <h1>닉네임</h1>
             </TextPart>
             <TextPart>
-            <main>자기소개</main>
+              <main>자기소개</main>
             </TextPart>
             <TextPart>
-            <main>내가 속한 단체</main>
+              <main>내가 속한 단체</main>
             </TextPart>
-        </TextBox>
-      </WhiteBox>
+          </TextBox>
+        </WhiteBox>
+      )}
+      {!showMyPage && <WhiteBox></WhiteBox>}
     </HomepagePosition>
   );
 }
