@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useTable } from "react-table";
 import styled from "styled-components";
 
@@ -58,6 +59,12 @@ function MyGroupTable({ columns, data }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
+  const navigate = useNavigate();
+  // const groupIds = data.map(item => item.groupId);
+  const handleMoveButtonClick = (gID) => {
+    navigate(`/group/${gID}`)
+  };
+
   return (
     <GroupTable {...getTableProps()}>
       <thead>
@@ -77,7 +84,10 @@ function MyGroupTable({ columns, data }) {
               {row.cells.map((cell, index) => (
                 <td {...cell.getCellProps()}>
                   {cell.render("Cell")}
-                  {(index === 2) && (<MoveButton color="green">단체홈피로 이동</MoveButton>)}
+                  {(index === 2) && (
+                  <MoveButton color="green" onClick={() => handleMoveButtonClick(row.original.groupId)}>
+                    단체홈피로 이동
+                  </MoveButton>)}
                   {(index === 3) && (<MoveButton color="red">단체탈퇴</MoveButton>)}
                   </td>
               ))}

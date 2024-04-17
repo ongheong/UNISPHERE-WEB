@@ -18,6 +18,8 @@ class App extends React.Component {
           <Route path="/login" element={<LoginScreen/>}/>
           <Route path="/guide" element={<GuideScreen/>}/>
           <Route path="/myhomepage" element={<HomepageScreen/>}/>
+          {/* 특정 단체 페이지로 이동하기 위한 라우터 */}
+          <Route path="/group/:groupId" element={<HomepageScreen/>} />
           <Route path="/article" element={<ArticleScreen/>}/>
           <Route path="/intro" element={<IntroScreen/>}/>
           <Route path="/mypage" element={<MyPageScreen/>}/>
