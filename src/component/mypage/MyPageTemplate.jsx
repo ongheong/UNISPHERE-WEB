@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import styled from "styled-components";
 import MenuBar from "../common/MenuBar.jsx";
 import AlertBar from "../common/Alert.jsx";
@@ -13,6 +13,10 @@ function IntroTemplate() {
   const [showMyPage, setShowMyPage] = useState(true);
   const [buttonOneZIndex, setButtonOneZIndex] = useState(2); // 기본 버튼은 홈피 버튼
   const [buttonTwoZIndex, setButtonTwoZIndex] = useState(0);
+  const avatarModifyRef = useRef(null);
+  const avatarModifyButtonClick = () => {
+    avatarModifyRef.current.click();
+  };
 
   const columns = useMemo(
     () => [
@@ -82,6 +86,7 @@ function IntroTemplate() {
         내 정보
       </ButtonOne>
       <ButtonTwo
+        ref={avatarModifyRef}
         onClick={() => {
           setShowMyPage(false);
           setButtonOneZIndex(0);
@@ -110,7 +115,7 @@ function IntroTemplate() {
                   marginTop="35px"
                 />
               ) : null}
-              <AvatarChangeButton>아바타 수정</AvatarChangeButton>
+              <AvatarChangeButton onClick={avatarModifyButtonClick}>아바타 수정</AvatarChangeButton>
             </AvatarBox>
             <MyInfoContainer>
               <MyInfoItem>
